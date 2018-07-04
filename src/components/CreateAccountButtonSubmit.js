@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import {
@@ -11,7 +11,7 @@ import {
   Alert,
   View,
 } from 'react-native';
-import {Actions, ActionConst} from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import spinner from '../images/loading.gif';
 
@@ -35,7 +35,7 @@ export default class CreateAccountButtonSubmit extends Component {
   _onPress() {
     if (this.state.isLoading) return;
 
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     Animated.timing(this.buttonAnimated, {
       toValue: 1,
       duration: 200,
@@ -47,13 +47,34 @@ export default class CreateAccountButtonSubmit extends Component {
     }, 2000);
 
     setTimeout(() => {
-      Actions.creatAccount();
-      this.setState({isLoading: false});
+      this._online();
+      // Actions.creatAccount();
+      this.setState({ isLoading: false });
       this.buttonAnimated.setValue(0);
       this.growAnimated.setValue(0);
     }, 2300);
   }
-
+  _online() {
+    fetch('http://requestbin.fullcontact.com/qqmymiqq', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: 'dsf',
+        email: 'a@gmail.com',
+        mobile :'3534',
+        password:'efef'
+      }),
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   _onGrow() {
     Animated.timing(this.growAnimated, {
       toValue: 1,
@@ -74,7 +95,7 @@ export default class CreateAccountButtonSubmit extends Component {
 
     return (
       <View style={styles.container}>
-        <Animated.View style={{width: changeWidth}}>
+        <Animated.View style={{ width: changeWidth }}>
           <TouchableOpacity
             style={styles.button}
             onPress={this._onPress}
@@ -82,8 +103,8 @@ export default class CreateAccountButtonSubmit extends Component {
             {this.state.isLoading ? (
               <Image source={spinner} style={styles.image} />
             ) : (
-              <Text style={styles.text}>REGISTER</Text>
-            )}
+                <Text style={styles.text}>REGISTER</Text>
+              )}
           </TouchableOpacity>
           {/* <Animated.View
             style={[styles.circle, {transform: [{scale: changeScale}]}]}

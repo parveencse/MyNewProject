@@ -50,15 +50,15 @@ export default class SecondScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={this._onPress}
           style={styles.button}
           activeOpacity={1}>
           <Image style={styles.image} source={arrowImg} />
-        </TouchableOpacity>
-        <Animated.View
+        </TouchableOpacity> */}
+        {/* <Animated.View
           style={[styles.circle, {transform: [{scale: changeScale}]}]}
-        />
+        /> */}
       </View>
     );
   }
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     margin: 20,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
+    backgroundColor :'red'
   },
   button: {
     alignItems: 'center',
